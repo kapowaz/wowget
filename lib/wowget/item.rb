@@ -196,70 +196,13 @@ module Wowget
         self.item_class_id     = item_xml.css('wowhead item class').attribute('id').content.to_i
         self.item_subclass_id  = item_xml.css('wowhead item subclass').attribute('id').content.to_i
         self.icon_id           = item_xml.css('wowhead item icon').attribute('displayId').content.to_i
-        self.icon_id           = item_xml.css('wowhead item icon').inner_text.strip.to_s
+        self.icon_name         = item_xml.css('wowhead item icon').inner_text.strip.to_s
         self.required_level    = nil # parse from JSON
         self.inventory_slot_id = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
         self.buy_price         = nil # parse from JSON
         self.sell_price        = nil # parse from JSON
         self.created_by        = nil # parse from XML
-        
-        if item_xml.css('wowhead item createdBy').length == 1
-          # parse reagents
-        end
       end
-        
-# ++
-        # if item_xml.css('wowhead item createdBy').length == 1
-        #   
-        #   self.id = item_id.to_i
-        #   self.name = item_xml.css('wowhead item name')
-        #   
-        #   total_cost = 0
-        #   reagents = []
-        #   reagents_xml = item_xml.css('wowhead item createdBy spell reagent')
-        #   reagents_xml.each do |reagent|
-        # 
-        #     # determine if this reagent can be bought from a vendor (source: 5)
-        #     # TODO: this needs to ignore items sold by vendors for something other than cash!
-        #     # reagent_json["source"].include?(5) ? vendor_price(reagent.attribute('id')) : item_value(reagent.attribute('id'))[:precise]
-        #     reagent_search = Nokogiri::XML(open("http://www.wowhead.com/item=#{reagent.attribute('id')}&xml"))
-        #     reagent_json = JSON "{#{reagent_search.css('wowhead item json').inner_text.strip}}"
-        #     item_cost = item_value(reagent.attribute('id'))[:precise]
-        #     total_cost += item_cost * reagent.attribute('count').content.to_i
-        # 
-        #     reagents.push({
-        #       :item_id => reagent.attribute('id').to_s,
-        #       :name => reagent.attribute('name').to_s,
-        #       :icon => reagent.attribute('icon').to_s,
-        #       :quality => reagent.attribute('quality').content.to_i,
-        #       :quantity => reagent.attribute('count').content.to_i,
-        #       :price => item_cost
-        #     })
-        #   end
-        #   recipe = {
-        #     :item_id => item_id,
-        #     :name => id_search.css('wowhead item name').inner_text.strip.to_s,
-        #     :icon => id_search.css('wowhead item icon').inner_text.strip.to_s,
-        #     :level => id_search.css('wowhead item level').inner_text.strip,
-        #     :quality => id_search.css('wowhead item quality').attribute('id').content.to_i,
-        #     :reagents => reagents,
-        #     :price => total_cost
-        #   }
-        #   recipe
-        # else
-        #   # this item can't be crafted
-        #   recipe = {
-        #     :item_id => item_id,
-        #     :name => id_search.css('wowhead item name').inner_text.strip.to_s,
-        #     :icon => id_search.css('wowhead item icon').inner_text.strip.to_s,
-        #     :level => id_search.css('wowhead item level').inner_text.strip,
-        #     :quality => id_search.css('wowhead item quality').attribute('id').content.to_i,
-        #     :reagents => [],
-        #     :price => 0,
-        #     :notcrafted => true
-        #   }
-        # end
-# --
     end
 
     def quality
