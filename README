@@ -1,4 +1,4 @@
 wowget
 ======
 
-Provides a RESTful API to wowhead.com's database.
+Ruby API to wowhead.com's item and spell database.
