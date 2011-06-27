@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'json'
 
 module Wowget
   class Item
@@ -15,7 +16,7 @@ module Wowget
     attr_accessor :inventory_slot_id
     attr_accessor :buy_price
     attr_accessor :sell_price
-    attr_accessor :created_by
+    attr_accessor :recipe_id
     attr_accessor :error
     
     ITEM_QUALITIES = ['Poor', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Artifact', 'Heirloom']
@@ -188,7 +189,9 @@ module Wowget
       item_xml = Nokogiri::XML(open("http://www.wowhead.com/item=#{item_id}&xml"))
       if item_xml.css('wowhead error').length == 1
         self.error = {:error => "not found"}
-      else        
+      else
+        item_json              = JSON "{#{item_xml.css('wowhead item json').inner_text.strip.to_s}}"
+        item_equip_json        = JSON "{#{item_xml.css('wowhead item jsonEquip').inner_text.strip.to_s}}"
         self.id                = item_id.to_i
         self.name              = item_xml.css('wowhead item name').inner_text.strip.to_s
         self.level             = item_xml.css('wowhead item level').inner_text.strip.to_i
@@ -197,11 +200,14 @@ module Wowget
         self.item_subclass_id  = item_xml.css('wowhead item subclass').attribute('id').content.to_i
         self.icon_id           = item_xml.css('wowhead item icon').attribute('displayId').content.to_i
         self.icon_name         = item_xml.css('wowhead item icon').inner_text.strip.to_s
-        self.required_level    = nil # parse from JSON
+        self.required_level    = item_json['reqlevel']
         self.inventory_slot_id = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
-        self.buy_price         = nil # parse from JSON
-        self.sell_price        = nil # parse from JSON
-        self.created_by        = nil # parse from XML
+        self.buy_price         = item_equip_json['buyprice']
+        self.sell_price        = item_equip_json['sellprice']
+        
+        if item_xml.css('wowhead item createdBy').length == 1
+          self.recipe_id = item_xml.css('wowhead item createdBy spell').attribute('id').content.to_i
+        end
       end
     end
 
