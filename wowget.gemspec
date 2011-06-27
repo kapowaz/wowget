@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'wowget'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.date        = '2011-06-27'
   s.summary     = "wowget"
   s.description = "Ruby API to wowhead.com's item and spell database."
