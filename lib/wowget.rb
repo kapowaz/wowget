@@ -1,5 +1,5 @@
-class Wowget
-  def self.foo
-    puts "Foo!"
-  end
+require 'wowget/item.rb'
+
+module Wowget
+  # ...
 end
