@@ -2,7 +2,7 @@ require "lib/wowget/item.rb"
 
 describe Wowget::Item do
   
-  describe "With a valid item ID" do
+  describe "With a valid ID" do
     item = Wowget::Item.new(4817)
     
     it "should have an item name" do
@@ -67,7 +67,7 @@ describe Wowget::Item do
     
   end
   
-  describe "With a craftable item" do
+  describe "With a recipe" do
     item = Wowget::Item.new(45559)
     
     it "should have a recipe spell to create this item" do
@@ -75,10 +75,10 @@ describe Wowget::Item do
     end
   end
   
-  describe "With an invalid item ID" do
+  describe "With an invalid ID" do
     item = Wowget::Item.new(nil)
     it "should return an error" do
-      item.id.should == nil && item.error.should == {:error => "not found"}
+      item.error.should == {:error => "not found"}
     end   
   end
 
