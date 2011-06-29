@@ -1,12 +1,14 @@
-Gem::Specification.new do |s|
-  s.name        = 'wowget'
-  s.version     = '0.1.1'
-  s.date        = '2011-06-27'
-  s.summary     = "wowget"
-  s.description = "Ruby API to wowhead.com's item and spell database."
-  s.authors     = ["Ben Darlow"]
-  s.email       = 'ben@kapowaz.net'
-  s.files       = Dir["lib/**/*", "spec/*"]
-  s.homepage    =
-    'http://github.com/kapowaz/wowget'
+Gem::Specification.new do |spec|
+  spec.name        = 'wowget'
+  spec.version     = '0.1.2'
+  spec.date        = '2011-06-29'
+  spec.summary     = "wowget"
+  spec.description = "Ruby API to wowhead.com's item and spell database."
+  spec.authors     = ["Ben Darlow"]
+  spec.email       = 'ben@kapowaz.net'
+  spec.files       = Dir["lib/**/*", "spec/*"]
+  spec.homepage    = 'http://github.com/kapowaz/wowget'
+  spec.add_runtime_dependency 'nokogiri', ['~> 1.4']
+  spec.add_runtime_dependency 'json', ['~> 1.5']
+  spec.add_development_dependency 'rspec', ['~> 2.6']
 end
