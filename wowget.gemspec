@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'wowget'
-  spec.version     = '0.1.2'
+  spec.version     = '0.1.3'
   spec.date        = '2011-06-29'
   spec.summary     = "wowget"
   spec.description = "Ruby API to wowhead.com's item and spell database."
@@ -9,6 +9,6 @@ Gem::Specification.new do |spec|
   spec.files       = Dir["lib/**/*", "spec/*"]
   spec.homepage    = 'http://github.com/kapowaz/wowget'
   spec.add_runtime_dependency 'nokogiri', ['~> 1.4']
-  spec.add_runtime_dependency 'json', ['~> 1.5']
+  spec.add_runtime_dependency 'json', ['~> 1.4']
   spec.add_development_dependency 'rspec', ['~> 2.6']
 end

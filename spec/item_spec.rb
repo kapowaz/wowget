@@ -1,4 +1,4 @@
-require "lib/wowget/item.rb"
+require_relative "../lib/wowget/item.rb"
 
 describe Wowget::Item do
   
@@ -80,6 +80,10 @@ describe Wowget::Item do
     it "should return an error" do
       item.error.should == {:error => "not found"}
     end   
+  end
+  
+  describe "With an item name" do
+    
   end
 
 end

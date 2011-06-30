@@ -1,5 +1,5 @@
-require "lib/wowget/item.rb"
-require "lib/wowget/spell.rb"
+require_relative "../lib/wowget/item.rb"
+require_relative "../lib/wowget/spell.rb"
 
 describe Wowget::Spell do
   
