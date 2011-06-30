@@ -30,7 +30,7 @@ describe Wowget::Spell do
     
     it "should have a professional skill requirement" do
       spell.profession.should == 'Blacksmithing' and
-      spell.skill_level.should == 450
+      spell.skill.should == 450
     end
   end
   

@@ -8,7 +8,7 @@ module Wowget
     attr_accessor :item_id
     attr_accessor :reagents
     attr_accessor :profession
-    attr_accessor :skill_level
+    attr_accessor :skill
     attr_accessor :error
 
     def initialize(spell_id)
@@ -44,7 +44,7 @@ module Wowget
         unless self.item_id.nil?
           p = spell_xml.xpath("//script[contains(., 'Markup')]").inner_text.scan(/\[ul\]\[li\](.+?)\[\/li\]/)[0][0].scan(/Requires (.+?) \(([0-9]+?)\)/)[0]
           self.profession = p[0]
-          self.skill_level = p[1].to_i
+          self.skill = p[1].to_i
         end
       end
     end
