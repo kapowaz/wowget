@@ -67,6 +67,13 @@ describe Wowget::Item do
     
   end
   
+  describe "With an ID passed as a string" do
+    item = Wowget::Item.new("4817")
+    it "should have an item name" do
+      item.name.should == "Blessed Claymore"
+    end
+  end
+  
   describe "With a recipe" do
     item = Wowget::Item.new(45559)
     
@@ -76,14 +83,25 @@ describe Wowget::Item do
   end
   
   describe "With an invalid ID" do
-    item = Wowget::Item.new(nil)
+    item = Wowget::Item.new(-1000)
     it "should return an error" do
       item.error.should == {:error => "not found"}
-    end   
+    end
   end
   
-  describe "With an item name" do
+  describe "With no item ID supplied" do
+    item = Wowget::Item.new(nil)
+    it "should return an error" do
+      item.error.should == {:error => "no item ID supplied"}
+    end
+  end
+  
+  describe "When the name of an item is supplied" do
+    item = Wowget::Item.new("Blessed Claymore")
     
+    it "should find the appropriate item" do
+      item.id.should == 4817
+    end
   end
 
 end
