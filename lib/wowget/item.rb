@@ -223,8 +223,8 @@ module Wowget
           self.icon_name         = item_xml.css('wowhead item icon').inner_text.strip.to_s
           self.required_level    = item_json['reqlevel']
           self.inventory_slot_id = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
-          self.buy_price         = item_equip_json['buyprice']
-          self.sell_price        = item_equip_json['sellprice']
+          self.buy_price         = item_equip_json['buyprice'].to_f / 10000
+          self.sell_price        = item_equip_json['sellprice'].to_f / 10000
 
           if item_xml.css('wowhead item createdBy').length == 1
             self.recipe_id = item_xml.css('wowhead item createdBy spell').attribute('id').content.to_i
