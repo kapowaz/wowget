@@ -22,19 +22,19 @@ describe Wowget::Item do
     end
     
     it "should have an item class value" do
-      item.item_class_id.should == 2
+      item.category_id.should == 2
     end
     
     it "should have an item class name" do
-      item.item_class.should == "Weapons"
+      item.category.should == "Weapons"
     end
 
     it "should have an item subclass value" do
-      item.item_subclass_id.should == 8
+      item.subcategory_id.should == 8
     end
 
     it "should have an item subclass name" do
-      item.item_subclass.should == "Two-Handed Swords"
+      item.subcategory.should == "Two-Handed Swords"
     end
     
     it "should have an icon value" do

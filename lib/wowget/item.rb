@@ -10,8 +10,8 @@ module Wowget
     attr_accessor :name
     attr_accessor :level
     attr_accessor :quality_id
-    attr_accessor :item_class_id
-    attr_accessor :item_subclass_id
+    attr_accessor :category_id
+    attr_accessor :subcategory_id
     attr_accessor :icon_id
     attr_accessor :icon_name
     attr_accessor :required_level
@@ -22,7 +22,7 @@ module Wowget
     attr_accessor :error
     
     ITEM_QUALITIES = ['Poor', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Artifact', 'Heirloom']
-    ITEM_CLASSES = {
+    ITEM_CATEGORIES = {
       0 => 'Consumables',
       1 => 'Containers',
       2 => 'Weapons',
@@ -36,7 +36,7 @@ module Wowget
       15 => 'Miscellaneous',
       16 => 'Glyphs'
     }  
-    ITEM_SUBCLASSES = {
+    ITEM_SUBCATEGORIES = {
       'Consumables' => {
         0 => 'Consumables',
         1 => 'Potions',
@@ -211,20 +211,20 @@ module Wowget
         if item_xml.css('wowhead error').length == 1
           self.error = {:error => "not found"}
         else
-          item_json              = JSON "{#{item_xml.css('wowhead item json').inner_text.strip.to_s}}"
-          item_equip_json        = JSON "{#{item_xml.css('wowhead item jsonEquip').inner_text.strip.to_s}}"
-          self.id                = item_id.to_i
-          self.name              = item_xml.css('wowhead item name').inner_text.strip.to_s
-          self.level             = item_xml.css('wowhead item level').inner_text.strip.to_i
-          self.quality_id        = item_xml.css('wowhead item quality').attribute('id').content.to_i
-          self.item_class_id     = item_xml.css('wowhead item class').attribute('id').content.to_i
-          self.item_subclass_id  = item_xml.css('wowhead item subclass').attribute('id').content.to_i
-          self.icon_id           = item_xml.css('wowhead item icon').attribute('displayId').content.to_i
-          self.icon_name         = item_xml.css('wowhead item icon').inner_text.strip.to_s
-          self.required_level    = item_json['reqlevel']
-          self.inventory_slot_id = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
-          self.buy_price         = item_equip_json['buyprice'].to_f / 10000
-          self.sell_price        = item_equip_json['sellprice'].to_f / 10000
+          item_json                = JSON "{#{item_xml.css('wowhead item json').inner_text.strip.to_s}}"
+          item_equip_json          = JSON "{#{item_xml.css('wowhead item jsonEquip').inner_text.strip.to_s}}"
+          self.id                  = item_id.to_i
+          self.name                = item_xml.css('wowhead item name').inner_text.strip.to_s
+          self.level               = item_xml.css('wowhead item level').inner_text.strip.to_i
+          self.quality_id          = item_xml.css('wowhead item quality').attribute('id').content.to_i
+          self.category_id    = item_xml.css('wowhead item class').attribute('id').content.to_i
+          self.subcategory_id = item_xml.css('wowhead item subclass').attribute('id').content.to_i
+          self.icon_id             = item_xml.css('wowhead item icon').attribute('displayId').content.to_i
+          self.icon_name           = item_xml.css('wowhead item icon').inner_text.strip.to_s
+          self.required_level      = item_json['reqlevel']
+          self.inventory_slot_id   = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
+          self.buy_price           = item_equip_json['buyprice'].to_f / 10000
+          self.sell_price          = item_equip_json['sellprice'].to_f / 10000
 
           if item_xml.css('wowhead item createdBy').length == 1
             self.recipe_id = item_xml.css('wowhead item createdBy spell').attribute('id').content.to_i
@@ -241,12 +241,12 @@ module Wowget
       ITEM_QUALITIES[self.quality_id]
     end
     
-    def item_class
-      ITEM_CLASSES[self.item_class_id]
+    def category
+      ITEM_CATEGORIES[self.category_id]
     end
     
-    def item_subclass
-      ITEM_SUBCLASSES[self.item_class][self.item_subclass_id]
+    def subcategory
+      ITEM_SUBCATEGORIES[self.category][self.subcategory_id]
     end
     
     def inventory_slot
