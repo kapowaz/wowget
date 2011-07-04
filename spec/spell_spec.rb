@@ -11,7 +11,24 @@ describe Wowget::Spell do
     end
   end
   
-
+  describe "With a non-profession spell" do
+    spell = Wowget::Spell.new(49244)
+    
+    it "should have a spell name" do
+      spell.name.should == "Create Eternal Fire"
+    end
+    
+    it "should have the correct quantity of reagents" do
+      spell.reagents[0][:quantity].should == 10
+    end
+    
+    it "shouldn't have any profession" do
+      spell.profession_id.should == nil and
+      spell.profession.should == nil and
+      spell.skill.should == nil
+    end
+  end
+  
   describe "With a recipe" do
     spell = Wowget::Spell.new(63188)
     
