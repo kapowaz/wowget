@@ -8,6 +8,7 @@ module Wowget
     attr_accessor :item_id
     attr_accessor :reagents
     attr_accessor :profession
+    attr_accessor :profession_id
     attr_accessor :skill
     attr_accessor :error
 
@@ -45,6 +46,26 @@ module Wowget
           p = spell_xml.xpath("//script[contains(., 'Markup')]").inner_text.scan(/\[ul\]\[li\](.+?)\[\/li\]/)[0][0].scan(/Requires (.+?) \(([0-9]+?)\)/)[0]
           self.profession = p[0]
           self.skill = p[1].to_i
+          
+          self.profession_id = case self.profession
+            when "Alchemy" then 1
+            when "Blacksmithing" then 2
+            when "Cooking" then 3
+            when "Enchanting" then 4
+            when "Engineering" then 5
+            when "First Aid" then 6
+            when "Jewelcrafting" then 7
+            when "Leatherworking" then 8
+            when "Mining" then 9
+            when "Tailoring" then 10
+            when "Yes" then 11
+            when "No" then 12
+            when "Fishing" then 13
+            when "Herbalism" then 14
+            when "Inscription" then 15
+            when "Archaeology" then 16
+          end
+          
         end
       end
     end

@@ -29,6 +29,7 @@ describe Wowget::Spell do
     end
     
     it "should have a professional skill requirement" do
+      spell.profession_id.should == 2 and
       spell.profession.should == 'Blacksmithing' and
       spell.skill.should == 450
     end
