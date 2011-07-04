@@ -65,6 +65,10 @@ describe Wowget::Item do
       item.buy_price.should == 12311
     end
     
+    it "should produce a colorised link" do
+      item.to_link.should == "\e[32m[Blessed Claymore]\e[0m"
+    end
+    
   end
   
   describe "With an ID passed as a string" do

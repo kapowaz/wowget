@@ -2,6 +2,7 @@ require 'net/http'
 require 'open-uri'
 require 'nokogiri'
 require 'json'
+require 'colored'
 
 module Wowget
   class Item
@@ -250,6 +251,20 @@ module Wowget
     
     def inventory_slot
       INVENTORY_SLOTS[self.inventory_slot_id]
+    end
+    
+    def to_link
+      color = case self.quality.downcase.to_sym
+      when :poor then 'white'
+      when :common then 'white'
+      when :uncommon then 'green'
+      when :rare then 'blue'
+      when :epic then 'magenta'
+      when :legendary then 'red'
+      when :artifact then 'yellow'
+      when :heirloom then 'yellow'
+      end
+      Colored.colorize "[#{self.name}]", :foreground => color
     end
     
     private
