@@ -14,7 +14,7 @@ module Wowget
 
     def initialize(spell_id)
       begin
-        url = open("http://www.wowhead.com/spell=#{spell_id}")        
+        url = open("http://www.wowhead.com/spell=#{spell_id}")
       rescue
         not_found = true
       end
@@ -27,7 +27,7 @@ module Wowget
         self.name = spell_xml.css('div.text h1').inner_text.strip.to_s
         
         if spell_xml.css('table#spelldetails td span.q4 a').length == 1
-          self.item_id = spell_xml.css('table#spelldetails td span.q4 a').attribute('href').content.scan(/\/item=([0-9]+)/)[0][0].to_i          
+          self.item_id = spell_xml.css('table#spelldetails td span.q4 a').attribute('href').content.match(/\/item=([0-9]+)/)[1].to_i
         end
         
         # reagents
@@ -35,17 +35,17 @@ module Wowget
           self.reagents = []
           reagents = spell_xml.css("h3:contains('Reagents')+table.iconlist tr td")
           reagents.each do |r|
-            item_id = r.css("span a").attribute('href').content.scan(/\/item=([0-9]+)/)[0][0].to_i
-            quantity = r.content.scan(/\(([0-9]+)\)$/)[0][0].to_i
+            item_id = r.css("span a").attribute('href').content.match(/\/item=([0-9]+)/)[1].to_i
+            quantity = r.content.match(/\(([0-9]+)\)$/)[1].to_i
             self.reagents.push({:item => Wowget::Item.new(item_id), :quantity => quantity})
           end
         end
         
         # profession
         unless self.item_id.nil?
-          p = spell_xml.xpath("//script[contains(., 'Markup')]").inner_text.scan(/\[ul\]\[li\](.+?)\[\/li\]/)[0][0].scan(/Requires (.+?) \(([0-9]+?)\)/)[0]
-          self.profession = p[0]
-          self.skill = p[1].to_i
+          matches = spell_xml.xpath("//script[contains(., 'Markup')]").inner_text.match(/\[ul\]\[li\](.+?)\[\/li\]/)[1].match(/Requires (.+?) \(([0-9]+?)\)/)
+          self.profession = matches[1]
+          self.skill = matches[2].to_i
           
           self.profession_id = case self.profession
             when "Alchemy" then 1
