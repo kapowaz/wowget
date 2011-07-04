@@ -26,8 +26,9 @@ module Wowget
       else
         self.name = spell_xml.css('div.text h1').inner_text.strip.to_s
         
-        if spell_xml.css('table#spelldetails td span.q4 a').length == 1
-          self.item_id = spell_xml.css('table#spelldetails td span.q4 a').attribute('href').content.match(/\/item=([0-9]+)/)[1].to_i
+        # does this spell produce an item? if so, what item_id?
+        if spell_xml.css('table#spelldetails th#icontab-icon1 + td span a').length == 1
+          self.item_id = spell_xml.css('table#spelldetails th#icontab-icon1 + td span a').attribute('href').content.match(/\/item=([0-9]+)/)[1].to_i
         end
         
         # reagents
@@ -36,7 +37,13 @@ module Wowget
           reagents = spell_xml.css("h3:contains('Reagents')+table.iconlist tr td")
           reagents.each do |r|
             item_id = r.css("span a").attribute('href').content.match(/\/item=([0-9]+)/)[1].to_i
-            quantity = r.content.match(/\(([0-9]+)\)$/)[1].to_i
+            quantity_match = r.content.match(/\(([0-9]+)\)$/)
+            if quantity_match.nil?
+              quantity = 1
+            else
+              quantity = quantity_match[1].to_i
+            end
+
             self.reagents.push({:item => Wowget::Item.new(item_id), :quantity => quantity})
           end
         end

@@ -9,8 +9,8 @@ describe Wowget::Spell do
     it "should have a spell name" do
       spell.name.should == "Battlelord's Plate Boots"
     end
-    
   end
+  
 
   describe "With a recipe" do
     spell = Wowget::Spell.new(63188)
