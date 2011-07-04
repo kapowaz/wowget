@@ -21,8 +21,8 @@ module Wowget
     attr_accessor :recipe_id
     attr_accessor :error
     
-    ITEM_QUALITIES = ['Poor', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Artifact', 'Heirloom']
-    ITEM_CATEGORIES = {
+    QUALITIES = ['Poor', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Artifact', 'Heirloom']
+    CATEGORIES = {
       0 => 'Consumables',
       1 => 'Containers',
       2 => 'Weapons',
@@ -36,7 +36,7 @@ module Wowget
       15 => 'Miscellaneous',
       16 => 'Glyphs'
     }  
-    ITEM_SUBCATEGORIES = {
+    SUBCATEGORIES = {
       'Consumables' => {
         0 => 'Consumables',
         1 => 'Potions',
@@ -205,7 +205,6 @@ module Wowget
         end
       end
       
-      
       if item_id
         item_xml = Nokogiri::XML(open("http://www.wowhead.com/item=#{item_id}&xml"))
         if item_xml.css('wowhead error').length == 1
@@ -238,15 +237,15 @@ module Wowget
     end
 
     def quality
-      ITEM_QUALITIES[self.quality_id]
+      QUALITIES[self.quality_id]
     end
     
     def category
-      ITEM_CATEGORIES[self.category_id]
+      CATEGORIES[self.category_id]
     end
     
     def subcategory
-      ITEM_SUBCATEGORIES[self.category][self.subcategory_id]
+      SUBCATEGORIES[self.category][self.subcategory_id]
     end
     
     def inventory_slot
