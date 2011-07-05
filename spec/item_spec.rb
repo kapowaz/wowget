@@ -58,11 +58,11 @@ describe Wowget::Item do
     end
     
     it "should have a vendor sell price" do
-      item.sell_price.should == 0.2462
+      item.sell_price.should == 2462
     end
     
     it "should have a vendor buy price" do
-      item.buy_price.should == 1.2311
+      item.buy_price.should == 12311
     end
     
     it "should produce a colorised link" do
