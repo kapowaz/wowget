@@ -187,52 +187,80 @@ module Wowget
       28 => 'Relic'
     }
     
-    def initialize(query)
+    def self.find(query)
+      item_ids = []
+      items    = []
       
       if query.class == Fixnum
         # easy — e.g. 12345
-        item_id = query
+        item_ids << query
       elsif query.class == String
         # try parsing a number, e.g. "12345"
         item_id = id_from_string(query)
         
-        # try searching for this item by name
-        unless item_id
+        unless item_id.nil?
+          item_ids << item_id
+        else
+          # try searching for this item by name
           item_redirect = Net::HTTP.get_response(URI.parse("http://www.wowhead.com/search?q=#{uri_escape(query)}"))["Location"]
           if item_redirect
-            item_id = item_redirect.match(/^\/item=([1-9][0-9]*)$/)[1].to_i
-          end
-        end
-      end
-      
-      if item_id
-        item_xml = Nokogiri::XML(open("http://www.wowhead.com/item=#{item_id}&xml"))
-        if item_xml.css('wowhead error').length == 1
-          self.error = {:error => "not found"}
-        else
-          item_json                = JSON "{#{item_xml.css('wowhead item json').inner_text.strip.to_s}}"
-          item_equip_json          = JSON "{#{item_xml.css('wowhead item jsonEquip').inner_text.strip.to_s}}"
-          self.id                  = item_id.to_i
-          self.name                = item_xml.css('wowhead item name').inner_text.strip.to_s
-          self.level               = item_xml.css('wowhead item level').inner_text.strip.to_i
-          self.quality_id          = item_xml.css('wowhead item quality').attribute('id').content.to_i
-          self.category_id    = item_xml.css('wowhead item class').attribute('id').content.to_i
-          self.subcategory_id = item_xml.css('wowhead item subclass').attribute('id').content.to_i
-          self.icon_id             = item_xml.css('wowhead item icon').attribute('displayId').content.to_i
-          self.icon_name           = item_xml.css('wowhead item icon').inner_text.strip.to_s
-          self.required_level      = item_json['reqlevel']
-          self.inventory_slot_id   = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
-          self.buy_price           = item_equip_json['buyprice'].to_i
-          self.sell_price          = item_equip_json['sellprice'].to_i
-
-          if item_xml.css('wowhead item createdBy').length == 1
-            self.recipe_id = item_xml.css('wowhead item createdBy spell').attribute('id').content.to_i
+            item_ids << item_redirect.match(/^\/item=([1-9][0-9]*)$/)[1].to_i
+          else
+            # try retrieving a list of items that match the supplied query
+            begin
+              # horrendously messy. fuck you very much, wowhead.
+              item_json = JSON Nokogiri::XML(open("http://www.wowhead.com/search?q=#{uri_escape(query)}")).inner_text.match(/new Listview\(\{template: 'item'.*, data: (\[.*\])\}\);$/)[1]
+            rescue
+              no_results = true
+            end
+            
+            if no_results || item_json.length == 0
+              self.error = {:error => "no items found"}
+            else
+              item_json.each do |item|
+                item_ids << item["id"].to_i
+              end
+            end
           end
         end
       elsif query.class == NilClass
+        item_ids << nil
+      end
+      
+      if item_ids.length > 0
+        item_ids.each do |item_id|
+          items << Wowget::Item.new(item_id)
+        end
+      end
+      
+      items.length == 1 ? items[0] : items
+    end
+    
+    def initialize(item_id)
+      item_xml = Nokogiri::XML(open("http://www.wowhead.com/item=#{item_id}&xml"))
+      if item_id.nil?
         self.error = {:error => "no item ID supplied"}
+      elsif item_xml.css('wowhead error').length == 1
+        self.error = {:error => "not found"}
       else
-        self.error = {:error => "unsupported initialiser"}
+        item_json              = JSON "{#{item_xml.css('wowhead item json').inner_text.strip.to_s}}"
+        item_equip_json        = JSON "{#{item_xml.css('wowhead item jsonEquip').inner_text.strip.to_s}}"
+        self.id                = item_id.to_i
+        self.name              = item_xml.css('wowhead item name').inner_text.strip.to_s
+        self.level             = item_xml.css('wowhead item level').inner_text.strip.to_i
+        self.quality_id        = item_xml.css('wowhead item quality').attribute('id').content.to_i
+        self.category_id       = item_xml.css('wowhead item class').attribute('id').content.to_i
+        self.subcategory_id    = item_xml.css('wowhead item subclass').attribute('id').content.to_i
+        self.icon_id           = item_xml.css('wowhead item icon').attribute('displayId').content.to_i
+        self.icon_name         = item_xml.css('wowhead item icon').inner_text.strip.to_s
+        self.required_level    = item_json['reqlevel']
+        self.inventory_slot_id = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
+        self.buy_price         = item_equip_json['buyprice'].to_i
+        self.sell_price        = item_equip_json['sellprice'].to_i
+
+        if item_xml.css('wowhead item createdBy').length == 1
+          self.recipe_id = item_xml.css('wowhead item createdBy spell').attribute('id').content.to_i
+        end
       end
     end
 
@@ -268,11 +296,11 @@ module Wowget
     
     private
     
-    def id_from_string(string)
+    def self.id_from_string(string)
       string.to_i if string.match /^[1-9][0-9]*$/
     end
     
-    def uri_escape(string)
+    def self.uri_escape(string)
       URI.escape(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     end
     

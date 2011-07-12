@@ -36,6 +36,10 @@ describe Wowget::Spell do
       spell.item_id.should == 45559
     end
     
+    it "should have a minimum and maximum number of items produced" do
+      spell.item_quantity_min.should == 1 and spell.item_quantity_max.should == 1
+    end
+    
     it "should have a list of reagents" do
       spell.reagents.length.should == 2 and
       spell.reagents.all? {|r| r[:item].class == Wowget::Item}.should == true and
@@ -49,6 +53,10 @@ describe Wowget::Spell do
       spell.profession_id.should == 2 and
       spell.profession.should == 'Blacksmithing' and
       spell.skill.should == 450
+    end
+    
+    it "should have a source" do
+      spell.source.should == "Drop"
     end
   end
   
