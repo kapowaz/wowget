@@ -78,11 +78,18 @@ describe Wowget::Item do
     end
   end
   
+  describe "With a Bind on Pickup item" do
+    item = Wowget::Item.find(52078)
+    it "should be soulbound" do
+      item.soulbound.should == true
+    end
+  end
+  
   describe "With a recipe" do
-    item = Wowget::Item.find(45559)
+    item = Wowget::Item.find(55060)
     
     it "should have a recipe spell to create this item" do
-      item.recipe_id.should == 63188
+      item.recipe_id.should == 76445
     end
   end
   

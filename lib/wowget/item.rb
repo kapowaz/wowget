@@ -19,6 +19,7 @@ module Wowget
     attr_accessor :buy_price
     attr_accessor :sell_price
     attr_accessor :recipe_id
+    attr_accessor :soulbound
     attr_accessor :error
     
     QUALITIES = ['Poor', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Artifact', 'Heirloom']
@@ -257,6 +258,7 @@ module Wowget
         self.inventory_slot_id = item_xml.css('wowhead item inventorySlot').attribute('id').content.to_i
         self.buy_price         = item_equip_json['buyprice'].to_i
         self.sell_price        = item_equip_json['sellprice'].to_i
+        self.soulbound         = item_xml.css('wowhead item htmlTooltip').inner_text.match('Binds when picked up') ? true : false
 
         if item_xml.css('wowhead item createdBy').length == 1
           self.recipe_id = item_xml.css('wowhead item createdBy spell').attribute('id').content.to_i
