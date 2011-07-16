@@ -299,11 +299,11 @@ module Wowget
     end
     
     def inventory_slot_name
-      INVENTORY_SLOTS[self.inventory_slot_id][:name]
+      self.inventory_slot_id == 0 ? nil : INVENTORY_SLOTS[self.inventory_slot_id][:name]
     end
     
     def inventory_slot_slug
-      INVENTORY_SLOTS[self.inventory_slot_id][:slug]      
+      self.inventory_slot_id == 0 ? nil : INVENTORY_SLOTS[self.inventory_slot_id][:slug]      
     end
     
     def to_link

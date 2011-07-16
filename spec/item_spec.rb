@@ -127,6 +127,18 @@ describe Wowget::Item do
     end
   end
 
+  describe "With an item that cannot be equipped" do
+    item = Wowget::Item.find(35624)
+    
+    it "should have no inventory slot name" do
+      item.inventory_slot_name.should == nil
+    end
+    
+    it "should have no inventory slot slug" do
+      item.inventory_slot_slug.should == nil
+    end
+  end
+
   describe "When an item name with multiple matches is supplied" do
     it "should return an array of items" do
       items = Wowget::Item.find("Titansteel")
