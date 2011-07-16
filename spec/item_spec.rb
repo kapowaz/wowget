@@ -58,7 +58,11 @@ describe Wowget::Item do
     end
     
     it "should have an inventory slot name" do
-      item.inventory_slot.should == "Two-Hand"
+      item.inventory_slot_name.should == "Two-Hand"
+    end
+
+    it "should have an inventory slot slug" do
+      item.inventory_slot_slug.should == "two_hand"
     end
     
     it "should have a required minimum level" do

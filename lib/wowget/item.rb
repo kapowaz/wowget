@@ -161,31 +161,31 @@ module Wowget
       }
     }
     INVENTORY_SLOTS = {
-      1 => 'Head',
-      2 => 'Neck',
-      3 => 'Shoulder',
-      4 => 'Shirt',
-      5 => 'Chest',
-      6 => 'Waist',
-      7 => 'Legs',
-      8 => 'Feet',
-      9 => 'Wrist',
-      10 => 'Hands',
-      11 => 'Finger',
-      12 => 'Trinket',
-      13 => 'One-Hand',
-      14 => 'Shield',
-      15 => 'Ranged',
-      16 => 'Back',
-      17 => 'Two-Hand',
-      18 => 'Bag',
-      19 => 'Tabard',
-      21 => 'Main Hand',
-      22 => 'Off Hand',
-      23 => 'Held In Off-hand',
-      24 => 'Projectile',
-      25 => 'Thrown',
-      28 => 'Relic'
+      1 => {:name => 'Head', :slug => 'head'},
+      2 => {:name => 'Neck', :slug => 'neck'},
+      3 => {:name => 'Shoulder', :slug => 'shoulder'},
+      4 => {:name => 'Shirt', :slug => 'shirt'},
+      5 => {:name => 'Chest', :slug => 'chest'},
+      6 => {:name => 'Waist', :slug => 'waist'},
+      7 => {:name => 'Legs', :slug => 'legs'},
+      8 => {:name => 'Feet', :slug => 'feet'},
+      9 => {:name => 'Wrist', :slug => 'wrist'},
+      10 => {:name => 'Hands', :slug => 'hands'},
+      11 => {:name => 'Finger', :slug => 'finger'},
+      12 => {:name => 'Trinket', :slug => 'trinket'},
+      13 => {:name => 'One-Hand', :slug => 'one_hand'},
+      14 => {:name => 'Shield', :slug => 'shield'},
+      15 => {:name => 'Ranged', :slug => 'ranged'},
+      16 => {:name => 'Back', :slug => 'back'},
+      17 => {:name => 'Two-Hand', :slug => 'two_hand'},
+      18 => {:name => 'Bag', :slug => 'bag'},
+      19 => {:name => 'Tabard', :slug => 'tabard'},
+      21 => {:name => 'Main Hand', :slug => 'main_hand'},
+      22 => {:name => 'Off Hand', :slug => 'off_hand'},
+      23 => {:name => 'Held In Off-hand', :slug => 'held_in_off_hand'},
+      24 => {:name => 'Projectile', :slug => 'projectile'},
+      25 => {:name => 'Thrown', :slug => 'thrown'},
+      28 => {:name => 'Relic', :slug => 'relic'}
     }
     
     def self.find(query)
@@ -296,6 +296,14 @@ module Wowget
     
     def inventory_slot
       INVENTORY_SLOTS[self.inventory_slot_id]
+    end
+    
+    def inventory_slot_name
+      INVENTORY_SLOTS[self.inventory_slot_id][:name]
+    end
+    
+    def inventory_slot_slug
+      INVENTORY_SLOTS[self.inventory_slot_id][:slug]      
     end
     
     def to_link
