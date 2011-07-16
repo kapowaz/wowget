@@ -24,140 +24,140 @@ module Wowget
     
     QUALITIES = ['Poor', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Artifact', 'Heirloom']
     CATEGORIES = {
-      0 => 'Consumables',
-      1 => 'Containers',
-      2 => 'Weapons',
-      3 => 'Gems',
-      4 => 'Armor',
-      7 => 'Trade Goods',
-      9 => 'Recipes',
-      10 => 'Currency',
-      12 => 'Quest',
-      13 => 'Keys',
-      15 => 'Miscellaneous',
-      16 => 'Glyphs'
+      0 => {:name => 'Consumables', :slug => 'consumables'},
+      1 => {:name => 'Containers', :slug => 'containers'},
+      2 => {:name => 'Weapons', :slug => 'weapons'},
+      3 => {:name => 'Gems', :slug => 'gems'},
+      4 => {:name => 'Armor', :slug => 'armor'},
+      7 => {:name => 'Trade Goods', :slug => 'tradegoods'},
+      9 => {:name => 'Recipes', :slug => 'recipes'},
+      10 => {:name => 'Currency', :slug => 'currency'},
+      12 => {:name => 'Quest', :slug => 'quest'},
+      13 => {:name => 'Keys', :slug => 'keys'},
+      15 => {:name => 'Miscellaneous', :slug => 'miscellaneous'},
+      16 => {:name => 'Glyphs', :slug => 'glyphs'}
     }  
     SUBCATEGORIES = {
       'Consumables' => {
-        0 => 'Consumables',
-        1 => 'Potions',
-        2 => 'Elixirs',
-        3 => 'Flasks',
-        4 => 'Scrolls',
-        5 => 'Food & Drinks',
-        6 => 'Item Enhancements (Permanent)',
-        -3 => 'Item Enhancements (Temporary)',
-        7 => 'Bandages',
-        8 => 'Other'
+        0 => {:name => 'Consumables', :slug => 'consumables'},
+        1 => {:name => 'Potions', :slug => 'potions'},
+        2 => {:name => 'Elixirs', :slug => 'elixirs'},
+        3 => {:name => 'Flasks', :slug => 'flasks'},
+        4 => {:name => 'Scrolls', :slug => 'scrolls'},
+        5 => {:name => 'Food & Drinks', :slug => 'food_and_drinks'},
+        6 => {:name => 'Item Enhancements (Permanent)', :slug => 'item_enhancements_permanent'},
+        -3 => {:name => 'Item Enhancements (Temporary)', :slug => 'item_enhancements_temporary'},
+        7 => {:name => 'Bandages', :slug => 'bandages'},
+        8 => {:name => 'Other', :slug => 'other'}
       },
       'Containers' => {
-        0 => 'Bags',
-        2 => 'Herb Bags',
-        3 => 'Enchanting Bags',
-        4 => 'Engineering Bags',
-        5 => 'Gem Bags',
-        6 => 'Mining Bags',
-        7 => 'Leatherworking Bags',
-        8 => 'Inscription Bags',
-        9 => 'Tackle Boxes'
+        0 => {:name => 'Bags', :slug => 'bags'},
+        2 => {:name => 'Herb Bags', :slug => 'herb'},
+        3 => {:name => 'Enchanting Bags', :slug => 'enchanting'},
+        4 => {:name => 'Engineering Bags', :slug => 'engineering'},
+        5 => {:name => 'Gem Bags', :slug => 'gem'},
+        6 => {:name => 'Mining Bags', :slug => 'mining'},
+        7 => {:name => 'Leatherworking Bags', :slug => 'leatherworking'},
+        8 => {:name => 'Inscription Bags', :slug => 'inscription'},
+        9 => {:name => 'Tackle Boxes', :slug => 'tackleboxes'}
       },
       'Weapons' => {
-        1 => 'Two-Handed Axes',
-        2 => 'Bows',
-        3 => 'Guns',
-        4 => 'One-Handed Maces',
-        5 => 'Two-Handed Maces',
-        6 => 'Polearms',
-        7 => 'One-Handed Swords',
-        8 => 'Two-Handed Swords',
-        10 => 'Staves',
-        13 => 'Fist Weapons',
-        14 => 'Miscellaneous',
-        15 => 'Daggers',
-        16 => 'Thrown',
-        18 => 'Crossbows',
-        19 => 'Wands',
-        20 => 'Fishing Poles'
+        1 => {:name => 'Two-Handed Axes', :slug => 'two_handed_axes'},
+        2 => {:name => 'Bows', :slug => 'bows'},
+        3 => {:name => 'Guns', :slug => 'guns'},
+        4 => {:name => 'One-Handed Maces', :slug => 'one_handed_maces'},
+        5 => {:name => 'Two-Handed Maces', :slug => 'two_handed_maces'},
+        6 => {:name => 'Polearms', :slug => 'polearms'},
+        7 => {:name => 'One-Handed Swords', :slug => 'one_handed_swords'},
+        8 => {:name => 'Two-Handed Swords', :slug => 'two_handed_swords'},
+        10 => {:name => 'Staves', :slug => 'staves'},
+        13 => {:name => 'Fist Weapons', :slug => 'fist_weapons'},
+        14 => {:name => 'Miscellaneous', :slug => 'miscellaneous'},
+        15 => {:name => 'Daggers', :slug => 'daggers'},
+        16 => {:name => 'Thrown', :slug => 'thrown'},
+        18 => {:name => 'Crossbows', :slug => 'crossbows'},
+        19 => {:name => 'Wands', :slug => 'wands'},
+        20 => {:name => 'Fishing Poles', :slug => 'fishing_poles'}
       },
       'Gems' => {
-        1 => 'Blue',
-        2 => 'Yellow',
-        3 => 'Purple',
-        4 => 'Green',
-        5 => 'Orange',
-        6 => 'Meta',
-        7 => 'Simple',
-        8 => 'Prismatic',
-        9 => 'Hydraulic',
-        10 => 'Cogwheel'
+        1 => {:name => 'Blue', :slug => 'blue'},
+        2 => {:name => 'Yellow', :slug => 'yellow'},
+        3 => {:name => 'Purple', :slug => 'purple'},
+        4 => {:name => 'Green', :slug => 'green'},
+        5 => {:name => 'Orange', :slug => 'orange'},
+        6 => {:name => 'Meta', :slug => 'meta'},
+        7 => {:name => 'Simple', :slug => 'simple'},
+        8 => {:name => 'Prismatic', :slug => 'prismatic'},
+        9 => {:name => 'Hydraulic', :slug => 'hydraulic'},
+        10 => {:name => 'Cogwheel', :slug => 'cogwheel'}
       },
       'Armor' => {
-        -8 => 'Shirts',
-        -7 => 'Tabards',
-        -6 => 'Cloaks',
-        -5 => 'Off-hand Frills',
-        -4 => 'Trinkets',
-        -3 => 'Amulets',
-        -2 => 'Rings',
-        0 => 'Miscellaneous',
-        1 => 'Cloth Armor',
-        2 => 'Leather Armor',
-        3 => 'Mail Armor',
-        4 => 'Plate Armor',
-        6 => 'Shields',
-        11 => 'Relics'
+        -8 => {:name => 'Shirts', :slug => 'shirts'},
+        -7 => {:name => 'Tabards', :slug => 'tabards'},
+        -6 => {:name => 'Cloaks', :slug => 'cloaks'},
+        -5 => {:name => 'Off-hand Frills', :slug => 'off_hand_frills'},
+        -4 => {:name => 'Trinkets', :slug => 'trinkets'},
+        -3 => {:name => 'Amulets', :slug => 'amulets'},
+        -2 => {:name => 'Rings', :slug => 'rings'},
+        0 => {:name => 'Miscellaneous', :slug => 'miscellaneous'},
+        1 => {:name => 'Cloth', :slug => 'cloth'},
+        2 => {:name => 'Leather', :slug => 'leather'},
+        3 => {:name => 'Mail', :slug => 'mail'},
+        4 => {:name => 'Plate', :slug => 'plate'},
+        6 => {:name => 'Shields', :slug => 'shields'},
+        11 => {:name => 'Relics', :slug => 'relics'}
       },
       'Trade Goods' => {
-        1 => 'Parts',
-        2 => 'Explosives',
-        3 => 'Devices',
-        4 => 'Jewelcrafting',
-        5 => 'Cloth',
-        6 => 'Leather',
-        7 => 'Metal & Stone',
-        8 => 'Meat',
-        9 => 'Herbs',
-        10 => 'Elemental',
-        11 => 'Other',
-        12 => 'Enchanting',
-        13 => 'Materials',
-        14 => 'Armor Enchantments',
-        15 => 'Weapon Enchantments'
+        1 => {:name => 'Parts', :slug => 'parts'},
+        2 => {:name => 'Explosives', :slug => 'explosives'},
+        3 => {:name => 'Devices', :slug => 'devices'},
+        4 => {:name => 'Jewelcrafting', :slug => 'jewelcrafting'},
+        5 => {:name => 'Cloth', :slug => 'cloth'},
+        6 => {:name => 'Leather', :slug => 'leather'},
+        7 => {:name => 'Metal & Stone', :slug => 'metal_and_stone'},
+        8 => {:name => 'Meat', :slug => 'meat'},
+        9 => {:name => 'Herbs', :slug => 'herbs'},
+        10 => {:name => 'Elemental', :slug => 'elemental'},
+        11 => {:name => 'Other', :slug => 'other'},
+        12 => {:name => 'Enchanting', :slug => 'enchanting'},
+        13 => {:name => 'Materials', :slug => 'materials'},
+        14 => {:name => 'Armor Enchantments', :slug => 'armor_enchantments'},
+        15 => {:name => 'Weapon Enchantments', :slug => 'weapon_enchantments'}
       },
       'Recipes' => {
-        0 => 'Books ',
-        1 => 'Leatherworking Patterns',
-        2 => 'Tailoring Patterns',
-        3 => 'Engineering Schematics',
-        4 => 'Blacksmithing Plans',
-        5 => 'Cooking Recipes',
-        6 => 'Alchemy Recipes',
-        7 => 'First Aid Manuals',
-        8 => 'Enchanting Formulae',
-        9 => 'Fishing Books',
-        10 => 'Jewelcrafting Designs',
-        11 => 'Inscription Techniques'
+        0 => {:name => 'Books ', :slug => 'books'},
+        1 => {:name => 'Leatherworking Patterns', :slug => 'leatherworking'},
+        2 => {:name => 'Tailoring Patterns', :slug => 'tailoring'},
+        3 => {:name => 'Engineering Schematics', :slug => 'engineering'},
+        4 => {:name => 'Blacksmithing Plans', :slug => 'blacksmithing'},
+        5 => {:name => 'Cooking Recipes', :slug => 'cooking'},
+        6 => {:name => 'Alchemy Recipes', :slug => 'alchemy'},
+        7 => {:name => 'First Aid Manuals', :slug => 'first_aid'},
+        8 => {:name => 'Enchanting Formulae', :slug => 'enchanting'},
+        9 => {:name => 'Fishing Books', :slug => 'fishing'},
+        10 => {:name => 'Jewelcrafting Designs', :slug => 'jewelcrafting'},
+        11 => {:name => 'Inscription Techniques', :slug => 'inscription'}
       },
       'Miscellaneous' => {
-        -2 => 'Armor Tokens',
-        0 => 'Junk',
-        1 => 'Reagents',
-        2 => 'Companions',
-        3 => 'Holiday',
-        4 => 'Other',
-        5 => 'Mounts'
+        -2 => {:name => 'Armor Tokens', :slug => 'armor_tokens'},
+        0 => {:name => 'Junk', :slug => 'junk'},
+        1 => {:name => 'Reagents', :slug => 'reagents'},
+        2 => {:name => 'Companions', :slug => 'companions'},
+        3 => {:name => 'Holiday', :slug => 'holiday'},
+        4 => {:name => 'Other', :slug => 'other'},
+        5 => {:name => 'Mounts', :slug => 'mounts'}
       },
       'Glyphs' => {
-        1 => 'Warrior',
-        2 => 'Paladin',
-        3 => 'Hunter',
-        4 => 'Rogue',
-        5 => 'Priest',
-        6 => 'Death Knight',
-        7 => 'Shaman',
-        8 => 'Mage',
-        9 => 'Warlock',
-        11 => 'Druid'
+        1 => {:name => 'Warrior', :slug => 'warrior'},
+        2 => {:name => 'Paladin', :slug => 'paladin'},
+        3 => {:name => 'Hunter', :slug => 'hunter'},
+        4 => {:name => 'Rogue', :slug => 'rogue'},
+        5 => {:name => 'Priest', :slug => 'priest'},
+        6 => {:name => 'Death Knight', :slug => 'death_knight'},
+        7 => {:name => 'Shaman', :slug => 'shaman'},
+        8 => {:name => 'Mage', :slug => 'mage'},
+        9 => {:name => 'Warlock', :slug => 'warlock'},
+        11 => {:name => 'Druid', :slug => 'druid'}
       }
     }
     INVENTORY_SLOTS = {
@@ -274,8 +274,24 @@ module Wowget
       CATEGORIES[self.category_id]
     end
     
+    def category_name
+      CATEGORIES[self.category_id][:name]
+    end
+    
+    def category_slug
+      CATEGORIES[self.category_id][:slug]
+    end
+    
     def subcategory
-      SUBCATEGORIES[self.category][self.subcategory_id]
+      SUBCATEGORIES[self.category[:name]][self.subcategory_id]
+    end
+    
+    def subcategory_name
+      SUBCATEGORIES[self.category[:name]][self.subcategory_id][:name]
+    end
+    
+    def subcategory_slug
+      SUBCATEGORIES[self.category[:name]][self.subcategory_id][:slug]
     end
     
     def inventory_slot

@@ -21,20 +21,28 @@ describe Wowget::Item do
       item.quality.should == "Uncommon"
     end
     
-    it "should have an item class value" do
+    it "should have an item category value" do
       item.category_id.should == 2
     end
     
-    it "should have an item class name" do
-      item.category.should == "Weapons"
+    it "should have an item category name" do
+      item.category_name.should == "Weapons"
+    end
+    
+    it "should have an item category slug" do
+      item.category_slug.should == "weapons"
     end
 
-    it "should have an item subclass value" do
+    it "should have an item subcategory value" do
       item.subcategory_id.should == 8
     end
 
-    it "should have an item subclass name" do
-      item.subcategory.should == "Two-Handed Swords"
+    it "should have an item subcategory name" do
+      item.subcategory_name.should == "Two-Handed Swords"
+    end
+    
+    it "should have an item subcategory slug" do
+      item.subcategory_slug.should == "two_handed_swords"
     end
     
     it "should have an icon value" do
