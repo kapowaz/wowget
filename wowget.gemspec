@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
   spec.name        = 'wowget'
-  spec.version     = '0.4.2'
-  spec.date        = '2011-07-16'
+  spec.version     = '0.4.3'
+  spec.date        = '2011-07-17'
   spec.summary     = "wowget"
   spec.description = "Ruby API to wowhead.com's item and spell database."
   spec.authors     = ["Ben Darlow"]

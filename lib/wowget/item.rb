@@ -100,12 +100,12 @@ module Wowget
         -3 => {:name => 'Amulets', :slug => 'amulets'},
         -2 => {:name => 'Rings', :slug => 'rings'},
         0 => {:name => 'Miscellaneous', :slug => 'miscellaneous'},
-        1 => {:name => 'Cloth', :slug => 'cloth'},
-        2 => {:name => 'Leather', :slug => 'leather'},
-        3 => {:name => 'Mail', :slug => 'mail'},
-        4 => {:name => 'Plate', :slug => 'plate'},
-        6 => {:name => 'Shields', :slug => 'shields'},
-        11 => {:name => 'Relics', :slug => 'relics'}
+        1 => {:name => 'Cloth', :slug => 'cloth', :inventoryslots => true},
+        2 => {:name => 'Leather', :slug => 'leather', :inventoryslots => true},
+        3 => {:name => 'Mail', :slug => 'mail', :inventoryslots => true},
+        4 => {:name => 'Plate', :slug => 'plate', :inventoryslots => true},
+        6 => {:name => 'Shields', :slug => 'shields', :inventoryslots => true},
+        11 => {:name => 'Relics', :slug => 'relics', :inventoryslots => true}
       },
       'Trade Goods' => {
         1 => {:name => 'Parts', :slug => 'parts'},
