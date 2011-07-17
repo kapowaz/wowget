@@ -105,7 +105,7 @@ module Wowget
         3 => {:name => 'Mail', :slug => 'mail', :inventoryslots => true},
         4 => {:name => 'Plate', :slug => 'plate', :inventoryslots => true},
         6 => {:name => 'Shields', :slug => 'shields'},
-        11 => {:name => 'Relics', :slug => 'relics}
+        11 => {:name => 'Relics', :slug => 'relics'}
       },
       'Trade Goods' => {
         1 => {:name => 'Parts', :slug => 'parts'},
@@ -161,16 +161,16 @@ module Wowget
       }
     }
     INVENTORY_SLOTS = {
-      1 => {:name => 'Head', :slug => 'head'},
+      1 => {:name => 'Head', :slug => 'head', :armor => true},
       2 => {:name => 'Neck', :slug => 'neck'},
-      3 => {:name => 'Shoulder', :slug => 'shoulder'},
+      3 => {:name => 'Shoulder', :slug => 'shoulder', :armor => true},
       4 => {:name => 'Shirt', :slug => 'shirt'},
-      5 => {:name => 'Chest', :slug => 'chest'},
-      6 => {:name => 'Waist', :slug => 'waist'},
-      7 => {:name => 'Legs', :slug => 'legs'},
-      8 => {:name => 'Feet', :slug => 'feet'},
-      9 => {:name => 'Wrist', :slug => 'wrist'},
-      10 => {:name => 'Hands', :slug => 'hands'},
+      5 => {:name => 'Chest', :slug => 'chest', :armor => true},
+      6 => {:name => 'Waist', :slug => 'waist', :armor => true},
+      7 => {:name => 'Legs', :slug => 'legs', :armor => true},
+      8 => {:name => 'Feet', :slug => 'feet', :armor => true},
+      9 => {:name => 'Wrist', :slug => 'wrist', :armor => true},
+      10 => {:name => 'Hands', :slug => 'hands', :armor => true},
       11 => {:name => 'Finger', :slug => 'finger'},
       12 => {:name => 'Trinket', :slug => 'trinket'},
       13 => {:name => 'One-Hand', :slug => 'one_hand'},
