@@ -104,8 +104,8 @@ module Wowget
         2 => {:name => 'Leather', :slug => 'leather', :inventoryslots => true},
         3 => {:name => 'Mail', :slug => 'mail', :inventoryslots => true},
         4 => {:name => 'Plate', :slug => 'plate', :inventoryslots => true},
-        6 => {:name => 'Shields', :slug => 'shields', :inventoryslots => true},
-        11 => {:name => 'Relics', :slug => 'relics', :inventoryslots => true}
+        6 => {:name => 'Shields', :slug => 'shields'},
+        11 => {:name => 'Relics', :slug => 'relics}
       },
       'Trade Goods' => {
         1 => {:name => 'Parts', :slug => 'parts'},
