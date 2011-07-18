@@ -2,6 +2,10 @@ require_relative "../lib/wowget/item.rb"
 
 describe Wowget::Item do
   
+  it "can find an item slot by its slug" do
+    Wowget::Item.inventory_slot_from_slug('held_in_off_hand').should == {:name => 'Held In Off-hand', :slug => 'held_in_off_hand'}
+  end
+  
   describe "With a valid ID" do
     item = Wowget::Item.find(4817)
     

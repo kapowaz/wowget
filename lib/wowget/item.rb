@@ -237,6 +237,14 @@ module Wowget
       items.length == 1 ? items[0] : items
     end
     
+    def self.inventory_slot_from_slug(slug)
+      found = nil
+      INVENTORY_SLOTS.each_pair do |id, slot|
+        found = slot if slot[:slug] == slug
+      end
+      found
+    end
+    
     def initialize(item_id)
       item_xml = Nokogiri::XML(open("http://www.wowhead.com/item=#{item_id}&xml"))
       if item_id.nil?

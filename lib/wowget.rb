@@ -2,5 +2,5 @@ require 'wowget/item.rb'
 require 'wowget/spell.rb'
 
 module Wowget
-  VERSION = '0.4.5'
+  VERSION = '0.4.6'
 end
