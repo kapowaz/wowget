@@ -240,7 +240,7 @@ module Wowget
     def self.inventory_slot_from_slug(slug)
       found = nil
       INVENTORY_SLOTS.each_pair do |id, slot|
-        found = slot if slot[:slug] == slug
+        found = slot.merge(:id => id) if slot[:slug] == slug
       end
       found
     end
